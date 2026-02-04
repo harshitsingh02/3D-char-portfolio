@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+:root {
+  /* LIGHT MODE (Default) */
+  --bg-color: #f4f4f5; /* Very light gray */
+  --bg-gradient: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+  --text-color: #18181b; /* Almost black for contrast */
+  --text-secondary: #52525b;
+  --accent-color: #7c3aed; /* Deep Purple (Visible on white) */
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --border-color: #e4e4e7;
+  --header-li: #424141;
+  
+  /* Tech Stack Specifics */
+  --tech-bg: linear-gradient(180deg, #f4f4f5 0%, #e4e4e7 100%);
+  --tech-text: #18181b;
+  
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  line-height: 1.5;
+  color-scheme: light dark;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  
+  /* Layout Vars */
+  --vh: 100vh;
+  --vh: 100svh;
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+  --bg-color: #0b080c;
+  --bg-gradient: #0b080c;
+  --text-color: #eae5ec;
+  --text-secondary: #a1a1aa;
+  --accent-color: #c2a4ff; /* Light Lavender (Original) */
+  --card-bg: rgba(20, 20, 20, 0.8);
+  --border-color: #27272a;
+  
+  --tech-bg: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+  --tech-text: #eae5ec;
+  --header-li: #eae5ec;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Geist", sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  --cWidth: calc(100% - 30px);
+  --cMaxWidth: 1920px;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Animations */
+main {
+  opacity: 1;
+  transition: 0.3s;
+}
+.main-active {
+  opacity: 0;
+  animation: fadeIn 1s 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeIn {
+  100% { opacity: 1; }
+}
+
+/* Containers */
+.main-body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+.container-main {
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+.container1 {
+  width: var(--cWidth);
+  height: var(--vh);
+  margin: auto;
+  position: relative;
+}
+
+/* Split Text - MODIFIED FOR SPACING FIX */
+.split-line { 
+  overflow: hidden; 
+  width: 100%;
+}
+.split-word {
+  display: inline-block;
+  white-space: pre-wrap; /* Critical: Preserves space between words */
+  margin-right: 0.2em; /* Fallback safety gap */
+}
+.split-word:last-child {
+  margin-right: 0;
+}
+.split-char {
+  display: inline-block;
+  white-space: pre; /* Critical: Prevents chars from collapsing */
+}
+.split-h2 {
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+/* TechStack */
+.techstack {
+  width: 100%;
+  position: relative;
+  height: var(--vh);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 150px 0;
+  background: var(--tech-bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+.techstack::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  /* subtle accent glow */
+  background: 
+    radial-gradient(circle at 20% 50%, var(--accent-color) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, var(--accent-color) 0%, transparent 50%);
+  opacity: 0.1; /* Very subtle */
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.techstack > * { position: relative; z-index: 1; }
+
+.techstack h2 {
+  font-size: 80px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 150px;
+  left: 0;
+  font-weight: 400;
+  text-transform: uppercase;
+  z-index: 3;
+  margin: 0;
+  color: var(--tech-text);
+}
+
+@media screen and (min-width: 768px) {
+  body { --cWidth: 94%; }
+}
+@media screen and (max-width: 900px) {
+  .techstack h2 { font-size: 40px; }
+}
+
+/* MINIMAL LENIS CONFIGURATION */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
