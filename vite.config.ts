@@ -1,21 +1,19 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
-    // OPTIMIZATION: Split code into smaller chunks for faster loading
+    outDir: 'dist',
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom"],
-          three: ["three", "@react-three/fiber", "@react-three/drei", "@react-three/rapier"],
-          gsap: ["gsap"],
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+          'gsap-vendor': ['gsap', 'lenis'],
+          'react-vendor': ['react', 'react-dom'],
         },
       },
     },
-    // Increase warning limit since 3D libraries are naturally large
-    chunkSizeWarningLimit: 1000,
   },
 });
